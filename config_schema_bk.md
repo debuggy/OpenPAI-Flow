@@ -1,8 +1,7 @@
-# Configuring PAI Flow
 
 ## Table of Contents
 - [version](#version)
-- [environment]()
+- [environment](#environment)
   - [base_docker](#base_docker)
   - [os](#os)
   - [env_variable](#env_variable)
@@ -57,7 +56,14 @@
 
 The version field is intended to be used in order to issue warnings for deprecation or breaking changes.
 
+## environment
 
+### base_docker
+### os
+### env_variable
+### general_components
+### python_requirements 
+### custom_commands
 
 
 
