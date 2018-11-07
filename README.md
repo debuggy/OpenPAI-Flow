@@ -1,2 +1,2 @@
-# OpenPAI-Flow
-Preparation and post work flow of Microsoft OpenPAI
+# PAIFlow
+Work flow of Microsoft OpenPAI
