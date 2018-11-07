@@ -2,7 +2,6 @@
 
 ## Table of Contents
 - [version](#version)
-
 - [environment]()
   - [base_docker](#base_docker)
   - [os](#os)
