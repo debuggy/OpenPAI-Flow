@@ -1,0 +1,76 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://example.com/root.json",
+  "type": "object",
+  "description": "Config schema of PAIFlow",
+  "required": [
+    "version",
+    "env_variables",
+    "base_docker",
+    "steps"
+  ],
+  "properties": {
+    "version": {
+      "$id": "#/properties/version",
+      "type": "number",
+      "description": "The version of the config definition.",
+      "default": 0.1
+    },
+    "env_variables": {
+      "$id": "#/properties/env_variables",
+      "type": "object",
+      "description": "The environment variables defined in dockerfile.",
+    },
+    "base_docker": {
+      "$id": "#/properties/base_docker",
+      "type": "string",
+      "description": "A base docker image that the dockerfile build from.",
+      "default": "",
+      "examples": [
+        "pai.build.base:hadoop2.7.2-cuda9.0-cudnn7-devel-ubuntu16.04"
+      ],
+      "pattern": "^(.*)$"
+    },
+    "steps": {
+      "$id": "#/properties/steps",
+      "type": "array",
+      "description": "An array of steps that discribe the build process.",
+      "items": {
+        "$id": "#/properties/steps/items",
+        "type": "object",
+        "required": [
+          "name",
+          "type",
+          "config"
+        ],
+        "properties": {
+          "name": {
+            "$id": "#/properties/steps/items/properties/name",
+            "type": "string",
+            "description": "The name of a certain build step.",
+            "pattern": "^(.*)$"
+          },
+          "type": {
+            "$id": "#/properties/steps/items/properties/type",
+            "type": "string",
+            "description": "The type of a certain build step.",
+            "oneof":[
+                "components",
+                "python_requirements",
+                "dataset",
+                "code",
+                "custom"
+            ],
+            "pattern": "^(.*)$"
+          },
+          "config": {
+            "$id": "#/properties/steps/items/properties/config",
+            "type": "object",
+            "description": "The config of a certain build step.",
+          }
+        }
+      }
+    }
+  }
+}
+  

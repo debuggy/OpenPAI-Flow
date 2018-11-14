@@ -1,0 +1,55 @@
+{
+    "version": 0.1,
+    "env_variables": {
+        "TENSORFLOW_VERSION": "1.4.0",
+        "LC_ALL": "C"
+    },
+    "base_docker": "pai.build.base:hadoop2.7.2-cuda9.0-cudnn7-devel-ubuntu16.04",
+    "steps": [
+        {
+            "name": "install_python",
+            "type": "components",
+            "config": {
+                "name": "python",
+                "version": "3.6"
+            }
+        },
+        {
+            "name": "install_tensorflow",
+            "type": "python_requirements",
+            "config": {
+                "name": "tensorflow-gpu",
+                "version": "1.4.0"
+            }
+        },
+        {
+            "name": "prepare_data",
+            "type": "dataset",
+            "config": {
+                "type": "local",
+                "operation": "copy",
+                "source": "./data",
+                "dest": "/data"
+            }
+        },
+        {
+            "name": "prepare_code",
+            "type": "code",
+            "config": {
+                "type": "github",
+                "url": "https://github.com/debuggy/DockerForPAI_init.git",
+                "access_token": "asdflkjasdflkjsdf",
+                "branch": "master",
+                "tag": "v0.1",
+                "commit": "asdfasdgf1234"
+            }
+        },
+        {
+            "name": "custom_command",
+            "type": "custom",
+            "config": {
+                "command": "python hello.py"
+            }
+        }
+    ]
+  }
