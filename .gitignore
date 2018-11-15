@@ -1,0 +1,6 @@
+npm-debug.log
+*.pdb
+*.obj
+*.out
+node_modules/
+out/

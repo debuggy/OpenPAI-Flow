@@ -16,7 +16,7 @@
         },
         {
             "name": "install_tensorflow",
-            "type": "python_requirements",
+            "type": "conda_install",
             "config": {
                 "name": "tensorflow-gpu",
                 "version": "1.4.0"
@@ -24,17 +24,15 @@
         },
         {
             "name": "prepare_data",
-            "type": "dataset",
+            "type": "local_copy",
             "config": {
-                "type": "local",
-                "operation": "copy",
                 "source": "./data",
                 "dest": "/data"
             }
         },
         {
             "name": "prepare_code",
-            "type": "code",
+            "type": "git_clone",
             "config": {
                 "type": "github",
                 "url": "https://github.com/debuggy/DockerForPAI_init.git",
@@ -42,6 +40,13 @@
                 "branch": "master",
                 "tag": "v0.1",
                 "commit": "asdfasdgf1234"
+            }
+        },
+        {
+            "name": "python_command",
+            "type": "python_script",
+            "config": {
+                "python_code": "print(\"hello world!\")"
             }
         },
         {
