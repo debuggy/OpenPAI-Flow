@@ -1,0 +1,42 @@
+const Ajv = require('ajv');
+const fs = require('fs-extra');
+
+async function validateJson(schema, data) {
+    const ajv = new Ajv();
+    const valid = ajv.validate(schema, data);
+    if (!valid) {
+        const errorMessage = `dataPath: ${ajv.errors[0].dataPath}, message: ${ajv.errors[0].message}.`;
+        return { valid: false, reason: errorMessage };
+    } else {
+        return { valid: true };
+    }
+}
+
+async function configConverter(config) {
+    const dockerContent;
+    dockerContent += `From ${base_docker}`; 
+    for (const envVar in )
+    
+
+}
+
+async function dockerGen() {
+    const configSchema = await fs.readJson('./config_schema.json');
+    const configExample = await fs.readJson('./config_example.json');
+    const validation = await validateJson(configSchema, configExample);
+    if (!validation.valid) {
+        throw new Error(`The config validation is not passed. ${validation.reason}`);
+    }
+
+    const dockerContent = await configConverter(configExample);
+    const 
+
+
+
+}
+
+dockerGen().then((data) => {
+    console.log(data);
+}).catch((err) => {
+    console.log(err);
+});

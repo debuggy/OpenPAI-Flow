@@ -1,0 +1,28 @@
+{
+  "name": "pai_flow",
+  "version": "0.0.1",
+  "dependencies": {
+    "ajv": "^6.5.5",
+    "fs-extra": "^7.0.1"
+  },
+  "description": "[![Documentation Status](https://readthedocs.org/projects/paiflow/badge/?version=latest)](https://paiflow.readthedocs.io/en/latest/?badge=latest)",
+  "main": "./src/index.js",
+  "directories": {
+    "doc": "docs",
+    "test": "test"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "node ./src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/debuggy/PAIFlow.git"
+  },
+  "author": "debuggy",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/debuggy/PAIFlow/issues"
+  },
+  "homepage": "https://github.com/debuggy/PAIFlow#readme"
+}

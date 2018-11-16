@@ -19,7 +19,7 @@
     "env_variables": {
       "$id": "#/properties/env_variables",
       "type": "object",
-      "description": "The environment variables defined in dockerfile.",
+      "description": "The environment variables defined in dockerfile."
     },
     "base_docker": {
       "$id": "#/properties/base_docker",
