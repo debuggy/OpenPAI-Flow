@@ -23,12 +23,12 @@ async function configConverter(config) {
 }
 
 async function dockerfileGenerator(configExample) {
-    const configSchema = await fs.readJson('.\\schemas\\config-schema.json');
+    const configSchema = await fs.readJson('./schemas/config-schema.json');
     const validation = await schemaValidator(configSchema, configExample);
     if (!validation.valid) {
         throw new SchemaValidationError(`The config validation is not passed.`, validation.errors);
     }
-    const dockerFilePath = '.\\dockerfile';
+    const dockerFilePath = './out/dockerfile';
     const dockerContent = await configConverter(configExample);
     await fs.outputFile(dockerFilePath, dockerContent);
     return dockerFilePath;
