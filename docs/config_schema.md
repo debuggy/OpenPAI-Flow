@@ -7,7 +7,7 @@
 
 ## sourcefile
 
-Here is the sourcefile of [config json schema](https://github.com/debuggy/PAIFlow/blob/master/config_schema.json) and an [example](https://github.com/debuggy/PAIFlow/blob/master/config_exmaple.json).
+Here is the sourcefile of [config json schema](https://github.com/debuggy/PAIFlow/blob/master/schemas/config-schema.json) and an [example](https://github.com/debuggy/PAIFlow/blob/master/examples/config-example.json).
 
 ## version
 
