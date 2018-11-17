@@ -20,8 +20,9 @@ script:
 
 deploy:
   provider: releases
-  api_key: $GITHUB_API_KEY
+  api_key: ${GITHUB_API_KEY}
   file: './out/dockerfile'
   skip_cleanup: true
   on:
-    tags
+    tags: true
+    all_branches: true
