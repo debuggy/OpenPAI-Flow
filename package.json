@@ -12,9 +12,12 @@
     "doc": "docs",
     "test": "test"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "jest": "^23.6.0"
+  },
   "scripts": {
-    "test": "node ./src/index.js"
+    "start": "node ./src/index.js",
+    "test": "jest"
   },
   "repository": {
     "type": "git",
