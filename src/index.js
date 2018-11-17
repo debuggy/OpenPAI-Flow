@@ -1,13 +1,13 @@
 const Ajv = require('ajv');
 const fs = require('fs-extra');
 const _ = require('lodash');
+const SchemaValidationError = require('./schema-validation-error');
 
 async function validateJson(schema, data) {
     const ajv = new Ajv();
     const valid = ajv.validate(schema, data);
     if (!valid) {
-        const errorMessage = `dataPath: ${ajv.errors[0].dataPath}, message: ${ajv.errors[0].message}.`;
-        return { valid: false, reason: errorMessage };
+        return { valid: false, errors: ajv.errors};
     } else {
         return { valid: true };
     }
@@ -33,11 +33,11 @@ async function configConverter(config) {
 }
 
 async function dockerGen() {
-    const configSchema = await fs.readJson('.\\config_schema.json');
-    const configExample = await fs.readJson('.\\config_example.json');
+    const configSchema = await fs.readJson('.\\config-schema.json');
+    const configExample = await fs.readJson('.\\examples\\config-negative-example.json');
     const validation = await validateJson(configSchema, configExample);
     if (!validation.valid) {
-        throw new Error(`The config validation is not passed. ${validation.reason}`);
+        throw new SchemaValidationError(`The config validation is not passed.`, validation.errors);
     }
 
     const dockerContent = await configConverter(configExample);
