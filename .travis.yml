@@ -17,6 +17,7 @@ cache:
 
 script:
   - yarn test
+  - yarn coveralls
 
 deploy:
   provider: releases
