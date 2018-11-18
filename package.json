@@ -16,9 +16,13 @@
   "scripts": {
     "debug": "node ./lib/index.js",
     "test": "jest",
-    "coveralls": "jest --coverage --coverageReporters=text-lcov | coveralls"
+    "coveralls": "jest --coverage --coverageReporters=text-lcov | coveralls",
+    "lint": "standard"
   },
-  "files": ["lib/", "schemas/"],
+  "files": [
+    "lib/",
+    "schemas/"
+  ],
   "dependencies": {
     "ajv": "^6.5.5",
     "fs-extra": "^7.0.1",
@@ -26,6 +30,7 @@
   },
   "devDependencies": {
     "coveralls": "^3.0.2",
-    "jest": "^23.6.0"
+    "jest": "^23.6.0",
+    "standard": "^12.0.1"
   }
 }
