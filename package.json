@@ -1,26 +1,8 @@
 {
   "name": "pai_flow",
   "version": "0.0.1",
-  "dependencies": {
-    "ajv": "^6.5.5",
-    "fs-extra": "^7.0.1",
-    "lodash": "^4.17.11"
-  },
   "description": "[![Documentation Status](https://readthedocs.org/projects/paiflow/badge/?version=latest)](https://paiflow.readthedocs.io/en/latest/?badge=latest)",
-  "main": "./src/index.js",
-  "directories": {
-    "doc": "docs",
-    "test": "test"
-  },
-  "devDependencies": {
-    "coveralls": "^3.0.2",
-    "jest": "^23.6.0"
-  },
-  "scripts": {
-    "start": "node ./src/index.js",
-    "test": "jest",
-    "coveralls": "jest --coverage --coverageReporters=text-lcov | coveralls"
-  },
+  "main": "./lib/index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/debuggy/PAIFlow.git"
@@ -30,5 +12,20 @@
   "bugs": {
     "url": "https://github.com/debuggy/PAIFlow/issues"
   },
-  "homepage": "https://github.com/debuggy/PAIFlow#readme"
+  "homepage": "https://github.com/debuggy/PAIFlow#readme",
+  "scripts": {
+    "start": "node ./lib/index.js",
+    "test": "jest",
+    "coveralls": "jest --coverage --coverageReporters=text-lcov | coveralls"
+  },
+  "files": ["lib/", "schemas/"],
+  "dependencies": {
+    "ajv": "^6.5.5",
+    "fs-extra": "^7.0.1",
+    "lodash": "^4.17.11"
+  },
+  "devDependencies": {
+    "coveralls": "^3.0.2",
+    "jest": "^23.6.0"
+  }
 }
