@@ -1,5 +1,5 @@
 {
-  "name": "pai_flow",
+  "name": "pai-flow",
   "version": "0.0.1",
   "description": "[![Documentation Status](https://readthedocs.org/projects/paiflow/badge/?version=latest)](https://paiflow.readthedocs.io/en/latest/?badge=latest)",
   "main": "./lib/index.js",
@@ -14,7 +14,7 @@
   },
   "homepage": "https://github.com/debuggy/PAIFlow#readme",
   "scripts": {
-    "start": "node ./lib/index.js",
+    "debug": "node ./lib/index.js",
     "test": "jest",
     "coveralls": "jest --coverage --coverageReporters=text-lcov | coveralls"
   },
