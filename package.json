@@ -1,6 +1,6 @@
 {
   "name": "pai-flow",
-  "version": "0.2",
+  "version": "0.2.0",
   "description": "[![Documentation Status](https://readthedocs.org/projects/paiflow/badge/?version=latest)](https://paiflow.readthedocs.io/en/latest/?badge=latest)",
   "main": "./lib/index.js",
   "repository": {
