@@ -1,6 +1,7 @@
 site_name: PAIFlow Docs
 nav:
     - Introduction: index.md
-    - Work Plan: work_plan.md
-    - Config Schema: config_schema.md
+    - Work Plan: work-plan.md
+    - Config Schema: config-schema.md
+    - Config Parser: config-parser.md
 theme: readthedocs
