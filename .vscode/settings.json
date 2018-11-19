@@ -1,4 +1,7 @@
 {
-    "javascript.validate.enable": false,
-    "standard.usePackageJson": true
+  "javascript.validate.enable": false,
+  "standard.usePackageJson": true,
+  "files.exclude": {
+    "node_modules": true
+  }
 }
