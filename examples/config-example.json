@@ -8,7 +8,7 @@
   "steps": [
     {
       "name": "install_python",
-      "type": "components",
+      "type": "install_python",
       "config": {
         "name": "python",
         "version": "3.6"
@@ -51,7 +51,7 @@
     },
     {
       "name": "custom_command",
-      "type": "custom",
+      "type": "custom_command",
       "config": {
         "command": "python hello.py"
       }
