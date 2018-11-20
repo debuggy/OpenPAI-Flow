@@ -31,12 +31,12 @@
       ],
       "pattern": "^(.*)$"
     },
-    "steps": {
-      "$id": "#/properties/steps",
+    "run_steps": {
+      "$id": "#/properties/run_steps",
       "type": "array",
       "description": "An array of steps that discribe the build process.",
       "items": {
-        "$id": "#/properties/steps/items",
+        "$id": "#/properties/run_steps/items",
         "type": "object",
         "required": [
           "name",
@@ -45,13 +45,13 @@
         ],
         "properties": {
           "name": {
-            "$id": "#/properties/steps/items/properties/name",
+            "$id": "#/properties/run_steps/items/properties/name",
             "type": "string",
             "description": "The name of a certain build step.",
             "pattern": "^(.*)$"
           },
           "type": {
-            "$id": "#/properties/steps/items/properties/type",
+            "$id": "#/properties/run_steps/items/properties/type",
             "type": "string",
             "description": "The type of a certain build step.",
             "oneof":[
@@ -64,7 +64,47 @@
             "pattern": "^(.*)$"
           },
           "config": {
-            "$id": "#/properties/steps/items/properties/config",
+            "$id": "#/properties/run_steps/items/properties/config",
+            "type": "object",
+            "description": "The config of a certain build step."
+          }
+        }
+      }
+    },
+    "entrypoint_steps": {
+      "$id": "#/properties/entrypoint_steps",
+      "type": "array",
+      "description": "An array of steps that discribe the entry point when running docker container.",
+      "items": {
+        "$id": "#/properties/entrypoint_steps/items",
+        "type": "object",
+        "required": [
+          "name",
+          "type",
+          "config"
+        ],
+        "properties": {
+          "name": {
+            "$id": "#/properties/entrypoint_steps/items/properties/name",
+            "type": "string",
+            "description": "The name of a certain build step.",
+            "pattern": "^(.*)$"
+          },
+          "type": {
+            "$id": "#/properties/entrypoint_steps/items/properties/type",
+            "type": "string",
+            "description": "The type of a certain build step.",
+            "oneof":[
+                "components",
+                "python_requirements",
+                "dataset",
+                "code",
+                "custom"
+            ],
+            "pattern": "^(.*)$"
+          },
+          "config": {
+            "$id": "#/properties/entrypoint_steps/items/properties/config",
             "type": "object",
             "description": "The config of a certain build step."
           }
