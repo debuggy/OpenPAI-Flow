@@ -5,7 +5,7 @@
     "LC_ALL": "C"
   },
   "base_docker": "pai.build.base:hadoop2.7.2-cuda9.0-cudnn7-devel-ubuntu16.04",
-  "steps": [
+  "run_steps": [
     {
       "name": "install_python",
       "type": "install_python",
@@ -41,16 +41,11 @@
         "tag": "v0.1",
         "commit": "asdfasdgf1234"
       }
-    },
+    }
+  ],
+  "entrypoint_steps": [
     {
-      "name": "python_command",
-      "type": "python_script",
-      "config": {
-        "python_code": "print(\"hello world!\")"
-      }
-    },
-    {
-      "name": "custom_command",
+      "name": "custom_install",
       "type": "custom_command",
       "config": {
         "command": "python hello.py"
