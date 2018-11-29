@@ -1,0 +1,19 @@
+# version: 0.1
+
+From ubuntu
+
+ENV TINI_VERSION v0.9.0
+RUN apt-get update && \
+    apt-get install -y curl wget gnupg bzip2
+
+RUN wget http://repo.continuum.io/miniconda/Miniconda-latest-Linux-x86_64.sh -O ~/miniconda.sh
+RUN chmod 0755 ~/miniconda.sh
+RUN ~/miniconda.sh -b -p ~/conda
+ENV PATH "~/conda/bin:$PATH"
+RUN ["/bin/bash", "-c", "conda create -n build_test python=3.4 && source activate build_test && conda install numpy"]
+
+# RUN conda activate bulid_test
+# RUN conda install scikit-learn
+
+
+
