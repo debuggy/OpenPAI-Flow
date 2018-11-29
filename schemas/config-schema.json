@@ -21,7 +21,7 @@
     "name": {
       "$id": "#/properties/name",
       "type": "string",
-      "description": "The name of the job",
+      "description": "The name of the job"
     },
     "env_variables": {
       "$id": "#/properties/env_variables",
