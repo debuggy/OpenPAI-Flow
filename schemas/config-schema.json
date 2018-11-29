@@ -5,16 +5,23 @@
   "description": "Config schema of PAIFlow",
   "required": [
     "version",
+    "name",
     "env_variables",
     "base_docker",
-    "steps"
+    "run_steps",
+    "entrypoint_steps"
   ],
   "properties": {
     "version": {
       "$id": "#/properties/version",
       "type": "number",
-      "description": "The version of the config definition.",
-      "default": 0.1
+      "description": "The version of the job config.",
+      "default": 1.0
+    },
+    "name": {
+      "$id": "#/properties/name",
+      "type": "string",
+      "description": "The name of the job"
     },
     "env_variables": {
       "$id": "#/properties/env_variables",
@@ -113,4 +120,3 @@
     }
   }
 }
-  

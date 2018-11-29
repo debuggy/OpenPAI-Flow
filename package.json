@@ -1,18 +1,10 @@
 {
-  "name": "pai-flow",
+  "name": "gelato",
   "version": "0.2.0",
   "description": "[![Documentation Status](https://readthedocs.org/projects/paiflow/badge/?version=latest)](https://paiflow.readthedocs.io/en/latest/?badge=latest)",
   "main": "./lib/index.js",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/debuggy/PAIFlow.git"
-  },
   "author": "debuggy",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/debuggy/PAIFlow/issues"
-  },
-  "homepage": "https://github.com/debuggy/PAIFlow#readme",
   "scripts": {
     "debug": "node ./lib/index.js",
     "test": "jest",
