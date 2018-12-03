@@ -38,6 +38,21 @@
       ],
       "pattern": "^(.*)$"
     },
+    "shell": {
+      "$id": "#/properties/shell",
+      "type": "string",
+      "description": "Default shell used for commands",
+      "default": "sh"
+    },
+    "workdir": {
+      "$id": "#/properties/workdir",
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Working directory for any RUN, ENTRYPOINT instructions",
+      "default": ["/bin/sh", "-c"]
+    },
     "run_steps": {
       "$id": "#/properties/run_steps",
       "type": "array",
