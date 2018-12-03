@@ -30,13 +30,21 @@
     },
     "base_docker": {
       "$id": "#/properties/base_docker",
-      "type": "string",
+      "type": "object",
       "description": "A base docker image that the dockerfile build from.",
-      "default": "",
-      "examples": [
-        "pai.build.base:hadoop2.7.2-cuda9.0-cudnn7-devel-ubuntu16.04"
-      ],
-      "pattern": "^(.*)$"
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "image_url": {
+          "type": "string"
+        },
+        "os": {
+          "type": "string",
+          "enum": ["debian", "ubuntu"]
+        }
+      },
+      "required": ["image_url", "os"]
     },
     "shell": {
       "$id": "#/properties/shell",

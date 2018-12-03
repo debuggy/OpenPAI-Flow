@@ -6,7 +6,7 @@
   "author": "debuggy",
   "license": "MIT",
   "scripts": {
-    "debug": "node ./lib/index.js",
+    "debug": "node ./lib/index.js && docker build ./out",
     "test": "jest",
     "coveralls": "jest --coverage --coverageReporters=text-lcov | coveralls",
     "lint": "standard"
