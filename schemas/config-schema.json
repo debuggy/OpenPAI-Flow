@@ -46,20 +46,11 @@
       },
       "required": ["image_url", "os"]
     },
-    "shell": {
-      "$id": "#/properties/shell",
-      "type": "string",
-      "description": "Default shell used for commands",
-      "default": "sh"
-    },
     "workdir": {
       "$id": "#/properties/workdir",
-      "type": "array",
-      "items": {
-        "type": "string"
-      },
+      "type": "string",
       "description": "Working directory for any RUN, ENTRYPOINT instructions",
-      "default": ["/bin/sh", "-c"]
+      "default": "/"
     },
     "run_steps": {
       "$id": "#/properties/run_steps",
@@ -83,15 +74,7 @@
           "type": {
             "$id": "#/properties/run_steps/items/properties/type",
             "type": "string",
-            "description": "The type of a certain build step.",
-            "oneof":[
-                "components",
-                "python_requirements",
-                "dataset",
-                "code",
-                "custom"
-            ],
-            "pattern": "^(.*)$"
+            "description": "The type of a certain build step."
           },
           "config": {
             "$id": "#/properties/run_steps/items/properties/config",
@@ -123,15 +106,7 @@
           "type": {
             "$id": "#/properties/entrypoint_steps/items/properties/type",
             "type": "string",
-            "description": "The type of a certain build step.",
-            "oneof":[
-                "components",
-                "python_requirements",
-                "dataset",
-                "code",
-                "custom"
-            ],
-            "pattern": "^(.*)$"
+            "description": "The type of a certain build step."
           },
           "config": {
             "$id": "#/properties/entrypoint_steps/items/properties/config",
