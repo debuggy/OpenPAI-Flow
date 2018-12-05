@@ -8,11 +8,13 @@
   "scripts": {
     "debug": "node ./scripts/debug.js && docker build -t test ./out",
     "test": "jest",
+    "test-dev": "jest common/",
     "coveralls": "jest --coverage --coverageReporters=text-lcov | coveralls",
     "lint": "standard"
   },
   "files": [
     "lib/",
+    "!lib/__tests__",
     "schemas/"
   ],
   "dependencies": {
