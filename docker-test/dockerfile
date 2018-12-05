@@ -1,19 +1,39 @@
 # version: 0.1
 
-From ubuntu
+From tensorflow/tensorflow
 
-ENV TINI_VERSION v0.9.0
-RUN apt-get update && \
-    apt-get install -y curl wget gnupg bzip2
+SHELL ["/bin/bash", "-c"]
+ENV BASH_ENV=~/.bashrc
 
-RUN wget http://repo.continuum.io/miniconda/Miniconda-latest-Linux-x86_64.sh -O ~/miniconda.sh
-RUN chmod 0755 ~/miniconda.sh
-RUN ~/miniconda.sh -b -p ~/conda
-ENV PATH "~/conda/bin:$PATH"
-RUN ["/bin/bash", "-c", "conda create -n build_test python=3.4 && source activate build_test && conda install numpy"]
+RUN apt-get update
+RUN mv ~/.bashrc ~/.bashrc.bak
+RUN apt-get install -y curl wget gnupg bzip2
+RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-4.5.11-Linux-x86_64.sh -O ~/miniconda.sh
+RUN /bin/bash ~/miniconda.sh -b -p /opt/conda
+RUN rm ~/miniconda.sh
 
-# RUN conda activate bulid_test
-# RUN conda install scikit-learn
+## docker does not start bash as login session
+# RUN echo "echo bash_profile" >> ~/.bash_profile
+# RUN echo "export PATH=/opt/conda/bin:$PATH" >> ~/.bash_profile
+# RUN echo "echo bash_login" >> ~/.bash_login
+# RUN echo "export PATH=/opt/conda/bin:$PATH" >> ~/.bash_login
+# RUN echo "echo .profile" >> ~/.profile
+# RUN echo "export PATH=/opt/conda/bin:$PATH" >> ~/.profile
+
+RUN echo 'export PATH=/opt/conda/bin:$PATH' >> ~/.bashrc && source ~/.bashrc
+RUN conda -V && \
+    conda create --yes -n docker python=3.6
+RUN echo 'source activate docker' >> ~/.bashrc && source ~/.bashrc
+RUN echo 'export PATH=/opt/conda/envs/docker/bin:$PATH' >> ~/.bashrc && source ~/.bashrc
+RUN conda install numpy
+
+RUN cat ~/.bashrc.bak >> ~/.bashrc
+
+CMD ["/bin/bash", "-c", "source activate docker"]
+
+
+
+
 
 
 
