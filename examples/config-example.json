@@ -6,7 +6,10 @@
     "TENSORFLOW_VERSION": "1.4.0",
     "LC_ALL": "C"
   },
-  "base_docker": "pai.build.base:hadoop2.7.2-cuda9.0-cudnn7-devel-ubuntu16.04",
+  "base_docker": {
+    "image_url": "tensorflow/tensorflow",
+    "os": "ubuntu"
+  },
   "run_steps": [
     {
       "name": "install_conda",

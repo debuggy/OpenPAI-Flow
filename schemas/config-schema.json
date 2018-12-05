@@ -30,13 +30,27 @@
     },
     "base_docker": {
       "$id": "#/properties/base_docker",
-      "type": "string",
+      "type": "object",
       "description": "A base docker image that the dockerfile build from.",
-      "default": "",
-      "examples": [
-        "pai.build.base:hadoop2.7.2-cuda9.0-cudnn7-devel-ubuntu16.04"
-      ],
-      "pattern": "^(.*)$"
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "image_url": {
+          "type": "string"
+        },
+        "os": {
+          "type": "string",
+          "enum": ["debian", "ubuntu"]
+        }
+      },
+      "required": ["image_url", "os"]
+    },
+    "workdir": {
+      "$id": "#/properties/workdir",
+      "type": "string",
+      "description": "Working directory for any RUN, ENTRYPOINT instructions",
+      "default": "/"
     },
     "run_steps": {
       "$id": "#/properties/run_steps",
@@ -60,15 +74,7 @@
           "type": {
             "$id": "#/properties/run_steps/items/properties/type",
             "type": "string",
-            "description": "The type of a certain build step.",
-            "oneof":[
-                "components",
-                "python_requirements",
-                "dataset",
-                "code",
-                "custom"
-            ],
-            "pattern": "^(.*)$"
+            "description": "The type of a certain build step."
           },
           "config": {
             "$id": "#/properties/run_steps/items/properties/config",
@@ -100,15 +106,7 @@
           "type": {
             "$id": "#/properties/entrypoint_steps/items/properties/type",
             "type": "string",
-            "description": "The type of a certain build step.",
-            "oneof":[
-                "components",
-                "python_requirements",
-                "dataset",
-                "code",
-                "custom"
-            ],
-            "pattern": "^(.*)$"
+            "description": "The type of a certain build step."
           },
           "config": {
             "$id": "#/properties/entrypoint_steps/items/properties/config",

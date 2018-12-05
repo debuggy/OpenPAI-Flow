@@ -2,14 +2,34 @@
 
 From tensorflow/tensorflow
 
+SHELL ["/bin/bash", "-c"]
+ENV BASH_ENV=~/.bashrc
 
 RUN apt-get update
+RUN mv ~/.bashrc ~/.bashrc.bak
 RUN apt-get install -y curl wget gnupg bzip2
 RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-4.5.11-Linux-x86_64.sh -O ~/miniconda.sh
 RUN /bin/bash ~/miniconda.sh -b -p /opt/conda
 RUN rm ~/miniconda.sh
-RUN echo "export PATH=/opt/conda/bin:$PATH" >> ~/.bashrc
-RUN export PATH=/opt/conda/bin:$PATH && echo $PATH && conda -V
+
+## docker does not start bash as login session
+# RUN echo "echo bash_profile" >> ~/.bash_profile
+# RUN echo "export PATH=/opt/conda/bin:$PATH" >> ~/.bash_profile
+# RUN echo "echo bash_login" >> ~/.bash_login
+# RUN echo "export PATH=/opt/conda/bin:$PATH" >> ~/.bash_login
+# RUN echo "echo .profile" >> ~/.profile
+# RUN echo "export PATH=/opt/conda/bin:$PATH" >> ~/.profile
+
+RUN echo 'export PATH=/opt/conda/bin:$PATH' >> ~/.bashrc && source ~/.bashrc
+RUN conda -V && \
+    conda create --yes -n docker python=3.6
+RUN echo 'source activate docker' >> ~/.bashrc && source ~/.bashrc
+RUN echo 'export PATH=/opt/conda/envs/docker/bin:$PATH' >> ~/.bashrc && source ~/.bashrc
+RUN conda install numpy
+
+RUN cat ~/.bashrc.bak >> ~/.bashrc
+
+CMD ["/bin/bash", "-c", "source activate docker"]
 
 
 
