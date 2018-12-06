@@ -1,6 +1,6 @@
 {
   "name": "gelato",
-  "version": "0.2.1",
+  "version": "0.2.3",
   "description": "A work flow for ai researcher to build training environment.",
   "bin": "./lib/cli.js",
   "main": "./lib/index.js",
