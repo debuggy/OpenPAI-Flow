@@ -1,7 +1,7 @@
 {
   "name": "gelato",
   "version": "0.2.0",
-  "description": "[![Documentation Status](https://readthedocs.org/projects/paiflow/badge/?version=latest)](https://paiflow.readthedocs.io/en/latest/?badge=latest)",
+  "description": "A work flow for ai researcher to build training environment.",
   "main": "./lib/index.js",
   "author": "debuggy",
   "license": "MIT",
