@@ -6,6 +6,9 @@
   "main": "./lib/index.js",
   "author": "debuggy",
   "license": "MIT",
+  "jest": {
+    "testMatch": ["**/?(*.)+(spec|test).js?(x)"]
+  },
   "scripts": {
     "test": "jest",
     "test-dev": "jest common/",
