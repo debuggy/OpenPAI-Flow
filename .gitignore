@@ -4,3 +4,5 @@ npm-debug.log
 *.out
 node_modules/
 out/
+docker-test/
+coverage/

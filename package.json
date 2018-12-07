@@ -13,7 +13,7 @@
     "test": "jest",
     "test-dev": "jest common/",
     "test-release": "jest release/",
-    "coveralls": "jest --coverage --coverageReporters=text-lcov common/ | coveralls",
+    "coveralls": "jest --coverage common/ && cat ./coverage/lcov.info | coveralls",
     "lint": "standard"
   },
   "files": [
