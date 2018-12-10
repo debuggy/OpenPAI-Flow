@@ -1,0 +1,33 @@
+---
+version: "0.1"
+name: flow_test
+author: debuggy
+env_variables:
+  TENSORFLOW_VERSION: "1.4.0"
+  LC_ALL: C
+base_docker:
+  image_url: tensorflow/tensorflow
+  os: ubuntu
+run_steps:
+- name: install conda
+  type: install_conda
+  config:
+    python_version: '3.6'
+    conda_version: "4.5.11"
+    env_name: example
+    bit: '64'
+- name: install pytorch
+  type: conda_install
+  config:
+    packages:
+    - pytorch
+entrypoint_steps:
+- name: prepare code
+  type: git_clone
+  config:
+    url: https://github.com/debuggy/DockerForPAI_init.git
+    branch: master
+- name: run python
+  type: custom_command
+  config:
+    command: cd DockerForPAI_init && python ./src/entrypoint.py

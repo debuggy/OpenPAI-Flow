@@ -1,0 +1,31 @@
+---
+version: '0.1'
+name: install_python
+author: noname
+env_variables: {}
+base_docker:
+  image_url: tensorflow/tensorflow
+  os: ubuntu
+run_steps:
+- name: install python
+  type: install_python
+  config:
+    version: '3.4'
+- name: install_git
+  type: install_git
+  config: {}
+entrypoint_steps:
+- name: prepare_code
+  type: git_clone
+  config:
+    type: github
+    url: https://github.com/debuggy/DockerForPAI_init.git
+    branch: master
+- name: check_version
+  type: custom_command
+  config:
+    command: python -V
+- name: hello_world
+  type: custom_command
+  config:
+    command: python src/cmd.py
