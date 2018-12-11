@@ -42,7 +42,7 @@
       "name": "hello_world",
       "type": "custom_command",
       "config": {
-        "command": "python src/cmd.py"
+        "command": "cd DockerForPAI_init && python src/cmd.py"
       }
     }
   ]
