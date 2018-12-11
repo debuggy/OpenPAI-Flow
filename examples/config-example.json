@@ -12,41 +12,39 @@
   },
   "run_steps": [
     {
-      "name": "install_conda",
+      "name": "install conda",
       "type": "install_conda",
       "config": {
-        "env_name": "flow_example",
-        "python_version": "3.6"
+        "python_version": "3.6",
+        "conda_version": "4.5.11",
+        "env_name": "example",
+        "bit": "64"
       }
     },
     {
-      "name": "install_tensorflow",
+      "name": "install pytorch",
       "type": "conda_install",
       "config": {
         "packages": [
-          {
-            "name": "scipy",
-            "version": "0.15.0"
-          }
+          "pytorch"
         ]
-      }
-    },
-    {
-      "name": "prepare_code",
-      "type": "git_clone",
-      "config": {
-        "type": "github",
-        "url": "https://github.com/debuggy/DockerForPAI_init.git",
-        "branch": "master"
       }
     }
   ],
   "entrypoint_steps": [
     {
-      "name": "custom_install",
+      "name": "prepare code",
+      "type": "git_clone",
+      "config": {
+        "url": "https://github.com/debuggy/DockerForPAI_init.git",
+        "branch": "master"
+      }
+    },
+    {
+      "name": "run python",
       "type": "custom_command",
       "config": {
-        "command": "python hello.py"
+        "command": "cd DockerForPAI_init && python ./src/entrypoint.py"
       }
     }
   ]
