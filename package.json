@@ -12,7 +12,7 @@
     ]
   },
   "scripts": {
-    "debug": "node ./lib/cli.js --output ./out/debug ./examples/config-example.json",
+    "debug": "node ./lib/cli.js --output ./out/debug ./examples/config-example.yml",
     "test": "jest",
     "test-dev": "jest common/",
     "test-release": "jest release/",
@@ -27,6 +27,7 @@
   "dependencies": {
     "ajv": "^6.5.5",
     "fs-extra": "^7.0.1",
+    "js-yaml": "^3.12.0",
     "lodash": "^4.17.11",
     "meow": "^5.0.0"
   },
