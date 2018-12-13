@@ -6,6 +6,7 @@
     "TENSORFLOW_VERSION": "1.4.0",
     "LC_ALL": "C"
   },
+  "workdir": "/root",
   "base_docker": {
     "image_url": "tensorflow/tensorflow",
     "os": "ubuntu"

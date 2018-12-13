@@ -2,6 +2,7 @@
 env_variables:
   TENSORFLOW_VERSION: 1.4.0
   LC_ALL: C
+workdir: '/root'
 base_docker: pai.build.base:hadoop2.7.2-cuda9.0-cudnn7-devel-ubuntu16.04
 steps:
 - name: install_python

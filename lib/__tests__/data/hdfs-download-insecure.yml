@@ -3,6 +3,7 @@ version: '0.1'
 name: hdfs_copy
 author: example
 env_variables: {}
+workdir: '/root'
 base_docker:
   image_url: tensorflow/tensorflow
   os: ubuntu
