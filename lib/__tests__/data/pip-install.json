@@ -1,0 +1,29 @@
+{
+  "version": 0.1,
+  "name": "install_python",
+  "author": "noname",
+  "env_variables": {},
+  "base_docker": {
+    "image_url": "tensorflow/tensorflow",
+    "os": "ubuntu"
+  },
+  "run_steps": [
+    {
+      "name": "install python",
+      "type": "install_python",
+      "config": {
+        "version": "3"
+      }
+    }
+  ],
+  "entrypoint_steps": [
+    {
+      "name": "install tensorflow",
+      "type": "pip_install",
+      "config": {
+          "packages": ["tensorflow"]
+      }
+    }
+  ]
+}
+    
