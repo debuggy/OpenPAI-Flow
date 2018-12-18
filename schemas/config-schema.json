@@ -8,28 +8,25 @@
     "name",
     "env_variables",
     "base_docker",
+    "workdir",
     "run_steps",
     "entrypoint_steps"
   ],
   "properties": {
     "version": {
-      "$id": "#/properties/version",
       "type": "string",
       "description": "The version of the job config.",
-      "default": 1.0
+      "default": "1.0"
     },
     "name": {
-      "$id": "#/properties/name",
       "type": "string",
       "description": "The name of the job"
     },
     "env_variables": {
-      "$id": "#/properties/env_variables",
       "type": "object",
       "description": "The environment variables defined in dockerfile."
     },
     "base_docker": {
-      "$id": "#/properties/base_docker",
       "type": "object",
       "description": "A base docker image that the dockerfile build from.",
       "properties": {
@@ -47,74 +44,316 @@
       "required": ["image_url", "os"]
     },
     "workdir": {
-      "$id": "#/properties/workdir",
       "type": "string",
-      "description": "Working directory for any RUN, ENTRYPOINT instructions",
-      "default": "/"
+      "description": "Working directory for the following RUN and ENTRYPOINT commands",
+      "default": "/root"
     },
     "run_steps": {
-      "$id": "#/properties/run_steps",
       "type": "array",
       "description": "An array of steps that discribe the build process.",
       "items": {
-        "$id": "#/properties/run_steps/items",
         "type": "object",
-        "required": [
-          "name",
-          "type",
-          "config"
-        ],
-        "properties": {
-          "name": {
-            "$id": "#/properties/run_steps/items/properties/name",
-            "type": "string",
-            "description": "The name of a certain build step.",
-            "pattern": "^(.*)$"
-          },
-          "type": {
-            "$id": "#/properties/run_steps/items/properties/type",
-            "type": "string",
-            "description": "The type of a certain build step."
-          },
-          "config": {
-            "$id": "#/properties/run_steps/items/properties/config",
-            "type": "object",
-            "description": "The config of a certain build step."
-          }
-        }
+        "anyOf": [
+          {"$ref": "#/definitions/install_conda"},
+          {"$ref": "#/definitions/conda_install"},
+          {"$ref": "#/definitions/custom_command"},
+          {"$ref": "#/definitions/git_clone"},
+          {"$ref": "#/definitions/hdfs_download"},
+          {"$ref": "#/definitions/install_python"},
+          {"$ref": "#/definitions/install_git"},
+          {"$ref": "#/definitions/pip_install"}
+        ]
       }
     },
     "entrypoint_steps": {
-      "$id": "#/properties/entrypoint_steps",
       "type": "array",
       "description": "An array of steps that discribe the entry point when running docker container.",
       "items": {
-        "$id": "#/properties/entrypoint_steps/items",
         "type": "object",
-        "required": [
-          "name",
-          "type",
-          "config"
-        ],
-        "properties": {
-          "name": {
-            "$id": "#/properties/entrypoint_steps/items/properties/name",
-            "type": "string",
-            "description": "The name of a certain build step.",
-            "pattern": "^(.*)$"
+        "anyOf": [
+          {"$ref": "#/definitions/install_conda"},
+          {"$ref": "#/definitions/conda_install"},
+          {"$ref": "#/definitions/custom_command"},
+          {"$ref": "#/definitions/git_clone"},
+          {"$ref": "#/definitions/hdfs_download"},
+          {"$ref": "#/definitions/install_python"},
+          {"$ref": "#/definitions/install_git"},
+          {"$ref": "#/definitions/pip_install"}
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "install_conda": {
+      "$id": "#/definitions/install_conda",
+      "type": "object",
+      "description": "install conda in the docker image",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the step"
+        },
+        "type": {
+          "type": "string",
+          "enum": ["install_conda"]
+        },
+        "config": {
+          "type": "object",
+          "properties": {
+            "python_version": {
+              "type": "string",
+              "default": "3.6"
+            },
+            "conda_version": {
+              "type": "string",
+              "default": "latest"
+            },
+            "env_name": {
+              "type": "string"
+            },
+            "bit": {
+              "type": "string",
+              "enum": ["32", "64"],
+              "default": "64"
+            }
           },
-          "type": {
-            "$id": "#/properties/entrypoint_steps/items/properties/type",
-            "type": "string",
-            "description": "The type of a certain build step."
+          "required": ["python_version", "conda_version", "bit"]
+        }
+      },
+      "required": ["name", "type", "config"]
+    },
+    "conda_install": {
+      "$id": "#/definitions/conda_install",
+      "type": "object",
+      "description": "install conda packages in the conda environment",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "the name of the step"
+        },
+        "type": {
+          "type": "string",
+          "enum": ["conda_install"]
+        },
+        "config": {
+          "type": "object",
+          "properties": {
+            "packages": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "description": "the package follows conda package match specifications, details:https://conda.io/docs/user-guide/tasks/build-packages/package-spec.html",
+                "examples": ["python=3.6", "numpy>1.11"]
+              }
+            }
           },
-          "config": {
-            "$id": "#/properties/entrypoint_steps/items/properties/config",
-            "type": "object",
-            "description": "The config of a certain build step."
+          "required": ["packages"]
+        }
+      },
+      "required": ["name", "type", "config"]
+    },
+    "custom_command": {
+      "$id": "#/definitions/custom_command",
+      "type": "object",
+      "description": "custom command defined by user",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "the name of the step"
+        },
+        "type": {
+          "type": "string",
+          "enum": ["custom_command"]
+        },
+        "config": {
+          "type": "object",
+          "properties": {
+            "command": {
+              "type": "string"
+            }
+          },
+          "required": ["command"]
+        }
+      },
+      "required": ["name", "type", "config"]
+    },
+    "git_clone": {
+      "$id": "#/definitions/git_clone",
+      "type": "object",
+      "description": "clone a git repo to local",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "the name of the step"
+        },
+        "type": {
+          "type": "string",
+          "enum": ["git_clone"]
+        },
+        "config": {
+          "type": "object",
+          "properties": {
+            "url": {
+              "type": "string",
+              "description": "the git repo url to clone"
+            },
+            "branch": {
+              "type": "string"
+            },
+            "tag": {
+              "type": "string"
+            }
+          },
+          "required": ["url"]
+        }
+      },
+      "required": ["name", "type", "config"]
+    },
+    "hdfs_download": {
+      "$id": "#/definitions/hdfs_download",
+      "type": "object",
+      "description": "download hdfs data to local",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "the name of the step"
+        },
+        "type": {
+          "type": "string",
+          "enum": ["hdfs_download"]
+        },
+        "config": {
+          "type": "object",
+          "definitions": {
+            "TokenClient": {
+              "$id": "#/definitions/hdfs_download/config/definitions/TokenClient",
+              "type": "object",
+              "properties": {
+                "url": {
+                  "type": "string",
+                  "description": "the web hdfs url"
+                },
+                "client_type": {
+                  "type": "string",
+                  "enum": ["TokenClient"]
+                },
+                "source_path": {
+                  "type": "string",
+                  "description": "the path from hdfs server to be downloaded"
+                },
+                "destination_path": {
+                  "type": "string",
+                  "description": "the path where hdfs data downloaded into"
+                },
+                "token": {
+                  "type": "string"
+                }
+              },
+              "required": ["url", "client_type", "source_path", "destination_path", "token"]
+            },
+            "InsecureClient": {
+              "$id": "#/definitions/hdfs_download/config/definitions/InsecureClient",
+              "type": "object",
+              "properties": {
+                "url": {
+                  "type": "string",
+                  "description": "the web hdfs url"
+                },
+                "client_type": {
+                  "type": "string",
+                  "enum": ["InsecureClient"]
+                },
+                "source_path": {
+                  "type": "string",
+                  "description": "the path from hdfs server to be downloaded"
+                },
+                "destination_path": {
+                  "type": "string",
+                  "description": "the path where hdfs data downloaded into"
+                },
+                "user": {
+                  "type": "string"
+                }
+              },
+              "required": ["url", "client_type", "source_path", "destination_path", "user"]
+            }
+          },
+          "oneOf": [
+            {"$ref": "#/definitions/hdfs_download/config/definitions/TokenClient"},
+            {"$ref": "#/definitions/hdfs_download/config/definitions/InsecureClient"}
+          ]
+        }
+      },
+      "required": ["name", "type", "config"]
+    },
+    "install_python": {
+      "$id": "#/definitions/install_python",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the step"
+        },
+        "type": {
+          "type": "string",
+          "enum": ["install_python"]
+        },
+        "config": {
+          "type": "object",
+          "properties": {
+            "version": {
+              "type": ["string", "number"],
+              "default": "3.6"
+            }
+          },
+          "required": ["version"]
+        }
+      },
+      "required": ["name", "type", "config"]
+    },
+    "install_git": {
+      "$id": "#/definitions/install_git",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the step"
+        },
+        "type": {
+          "type": "string",
+          "enum": ["install_git"]
+        },
+        "config": {
+          "type": "object"
+        }
+      },
+      "required": ["name", "type"]
+    },
+    "pip_install": {
+      "$id": "#/definitions/pip_install",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the step"
+        },
+        "type": {
+          "type": "string",
+          "enum": ["pip_install"]
+        },
+        "config": {
+          "type": "object",
+          "properties": {
+            "packages": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
           }
         }
-      }
+      },
+      "required": ["name", "type", "config"]
     }
   }
 }
